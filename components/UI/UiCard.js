@@ -10,7 +10,7 @@ export default function UiCard({ products }) {
 
 	return (
 		// <div className={styles.container}>algos</div>;
-		<Card shadow css={{ width: "350px", height: "400px" }}>
+		<Card shadow css={{ width: "300px", height: "400px" }}>
 			<Card.Image
 				src={products.image}
 				objectFit="cover"
