@@ -24,7 +24,11 @@ export default function Home() {
 	return (
 		<>
 			<NavBar />
-			<Grid.Container gap={4} justify="center" css={{ maxWidth: "100vw" }}>
+			<Grid.Container
+				gap={4}
+				justify="center"
+				css={{ maxWidth: "100vw", margin: "0" }}
+			>
 				{isLoading ? (
 					products.map((product) => (
 						<Grid sm={12} md={4} lg={3} xl={3} key={product.id}>
