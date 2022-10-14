@@ -67,7 +67,7 @@ export const Cart = () => {
 									) : (
 										<div>
 											{cartItems.map((item) => (
-												<Row
+												<Row    key={item.id}
 													width="80vw"
 													shadow
 													css={{
