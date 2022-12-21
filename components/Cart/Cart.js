@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
+import styles from "./Cart.module.scss";
+
 import CartContext from "../../Context/CartContext";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import {
@@ -33,30 +35,32 @@ export const Cart = () => {
 
 	return (
 		<>
-			<div style={{ color: "white" }}>
+			<div
+				style={{
+					color: "white",
+					// position:"relative",
+					// width: "100vw",
+					// display: "flex",
+					// justifyContent: "center",
+					// overflow:"hidden"
+				}}
+			>
 				<button
-					style={{ backgroundColor: "transparent", border: "none" }}
+					style={{
+						backgroundColor: "transparent",
+						border: "none",
+						cursor: "pointer",
+					}}
 					onClick={() => {
 						setCartOpen(!cartOpen);
 					}}
 				>
-					<ShoppingCartSharpIcon></ShoppingCartSharpIcon>
-					{!cartOpen && <div>{productsLength}</div>}
+					<ShoppingCartSharpIcon />
+					<div>{productsLength}</div>
 				</button>
-				{cartOpen && (
-					<div
-						style={{
-							position: "absolute",
-							right: "0",
-							top: "80px",
-							backgroundColor: "black",
-							zIndex: "1000",
-							width: "100vw",
-							height: "100vh",
-							overflow: "hidden",
-						}}
-					>
-						<Card css={{ height: "100vh" }}>
+				{cartOpen ? (
+					<div className={styles.dropdown} style={{ transform: "scale(1)" }}>
+						<Card css={{ borderBottom: "1px solid black" }}>
 							<Card.Header>
 								<Text h3>Tu carrito</Text>
 							</Card.Header>
@@ -67,7 +71,8 @@ export const Cart = () => {
 									) : (
 										<div>
 											{cartItems.map((item) => (
-												<Row    key={item.id}
+												<Row
+													key={item.id}
 													width="80vw"
 													shadow
 													css={{
@@ -78,14 +83,15 @@ export const Cart = () => {
 													<Col>
 														<Row justify="start" align="center">
 															<Text>
-																{item.name} * {item.price}{" "}({item.amount})
+																{item.name} * {item.price} ({item.amount})
 															</Text>
-                                                            
+
 															<button
 																style={{
 																	border: "none",
 																	backgroundColor: "transparent",
-                                                                    marginLeft: "20px"
+																	marginLeft: "20px",
+																	cursor: "pointer",
 																}}
 																onClick={() => editItemToCart(item)}
 															>
@@ -97,7 +103,8 @@ export const Cart = () => {
 																style={{
 																	border: "none",
 																	backgroundColor: "transparent",
-                                                                    marginLeft: "20px"
+																	marginLeft: "20px",
+																	cursor: "pointer",
 																}}
 																onClick={() => addItemToCart(item)}
 															>
@@ -123,11 +130,28 @@ export const Cart = () => {
 								<Col></Col>
 								<Col align="end">Total: ${total}</Col>
 							</Row>
-							<Row justify="center" css={{ padding: "20px" }}>
+							<Row
+								justify="space-evenly"
+								css={{
+									padding: "20px",
+									boxShadow: "1px 1px 3px 1px rgba(0,0,0,0.35)",
+								}}
+							>
+								<Button
+									onClick={() => {
+										setCartOpen(!cartOpen);
+									}}
+									css={{ backgroundColor: "red" }}
+								>
+									Cancelar
+								</Button>
+
 								<Button css={{ backgroundColor: "grey" }}>Pagar</Button>
 							</Row>
 						</Card>
 					</div>
+				) : (
+					<div className={styles.dropdown} />
 				)}
 			</div>
 		</>

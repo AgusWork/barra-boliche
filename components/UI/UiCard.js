@@ -4,7 +4,6 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import CartContext from "../../Context/CartContext";
 import { useContext } from "react";
 
-
 export default function UiCard({ products }) {
 	const { addItemToCart } = useContext(CartContext);
 
@@ -24,13 +23,22 @@ export default function UiCard({ products }) {
 			</Card.Body>
 			<Card.Divider />
 			<Card.Footer height="60px">
-				<Row justify="space-between" align="center">
+				<Row
+					justify="space-between"
+					align="center"
+					style={{ backgroundColor: "transparent" }}
+				>
 					<Text css={{ marginRight: "10px" }}>${products.price}</Text>
 					<button
 						className={styles.button}
 						onClick={() => addItemToCart(products)}
+						style={{
+							backgroundColor: "transparent",
+							cursor: "pointer",
+							border: "none",
+						}}
 					>
-						<AddCircleRoundedIcon color="action"/>
+						<AddCircleRoundedIcon color="action" />
 					</button>
 				</Row>
 			</Card.Footer>

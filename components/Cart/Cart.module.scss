@@ -1,0 +1,15 @@
+.dropdown{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 80px;
+    background-color: black;
+    z-index: 1000;
+    min-width: 50vw;
+    max-width: 100vw;
+    height: 100%;
+    transition:  all .3s ease-in-out;
+    transform-origin:  top;
+    transform: scaleY(0);
+}
