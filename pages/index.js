@@ -31,7 +31,7 @@ export default function Home() {
 			>
 				{isLoading ? (
 					products.map((product) => (
-						<Grid sm={12} md={4} lg={3} xl={3} key={product.id}>
+						<Grid  md={4} lg={3} xl={3} key={product.id}>
 							<UiCard products={product} />
 						</Grid>
 					))
