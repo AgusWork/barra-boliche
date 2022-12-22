@@ -10,7 +10,7 @@ export default function UiCard({ products }) {
 	const { addItemToCart } = useContext(CartContext);
 
 		const dosfunciones = (products) => {
-			toast(<Row><img src={products.image} style={{width:"65px", height:"65px", marginRight:"20px"}} /><Text h3>{products.name} </Text></Row> , {
+			toast(<Row><img src={products.image} style={{width:"65px", height:"65px", marginRight:"20px"}} /><Text h3>Agregado: {products.name} </Text></Row> , {
 			position: "top-right",
 			autoClose: 2000,
 			hideProgressBar: true,
