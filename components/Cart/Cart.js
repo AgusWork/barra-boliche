@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import styles from "./Cart.module.scss";
-
 import CartContext from "../../Context/CartContext";
+
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import {
 	Button,
@@ -14,13 +14,15 @@ import {
 } from "@nextui-org/react";
 import RemoveCircleOutlineSharpIcon from "@mui/icons-material/RemoveCircleOutlineSharp";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { red } from "@mui/material/colors";
 
 export const Cart = () => {
 	const [cartOpen, setCartOpen] = useState(false);
 	const [productsLength, setProductsLength] = useState(0);
 
-	const { cartItems, editItemToCart, addItemToCart } = useContext(CartContext);
+	const { cartItems, editItemToCart, addItemToCart, deleteAllItems } =
+		useContext(CartContext);
 
 	useEffect(() => {
 		setProductsLength(
@@ -74,16 +76,17 @@ export const Cart = () => {
 												<Row
 													key={item.id}
 													width="80vw"
+													height="120px"
 													shadow
 													css={{
 														padding: "20px",
 														boxShadow: "1px 1px 3px 1px rgba(0,0,0,0.35)",
 													}}
 												>
-													<Col>
+													<Col span={10}>
 														<Row justify="start" align="center">
-															<Text>
-																{item.name} * {item.price} ({item.amount})
+															<Text >
+																{item.name} = {item.price} * ({item.amount})
 															</Text>
 
 															<button
@@ -111,9 +114,21 @@ export const Cart = () => {
 																{" "}
 																<AddCircleRoundedIcon color="action" />
 															</button>
+															<button
+																style={{
+																	border: "none",
+																	backgroundColor: "transparent",
+																	marginLeft: "20%",
+																	cursor: "pointer",
+																}}
+																onClick={() => deleteAllItems(item)}
+															>
+																{" "}
+																<CancelOutlinedIcon color="action" />
+															</button>
 														</Row>
 													</Col>
-													<Col align="end">${item.price * item.amount}</Col>
+													<Col span={2} style={{display:"flex", justifyContent:"center", alignItems:"center"}} ><Text p >${item.price * item.amount}</Text></Col>
 												</Row>
 											))}
 										</div>

@@ -1,4 +1,6 @@
 import styles from "./Card.module.scss";
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import { Card, Row, Text } from "@nextui-org/react";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import CartContext from "../../Context/CartContext";
@@ -7,8 +9,23 @@ import { useContext } from "react";
 export default function UiCard({ products }) {
 	const { addItemToCart } = useContext(CartContext);
 
+		const dosfunciones = (products) => {
+			toast(<Row><img src={products.image} style={{width:"65px", height:"65px", marginRight:"20px"}} /><Text h3>{products.name} </Text></Row> , {
+			position: "top-right",
+			autoClose: 2000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		});
+			addItemToCart(products);
+		}
+
 	return (
-		// <div className={styles.container}>algos</div>;
+		<>
+		<ToastContainer/>
 		<Card shadow css={{ width: "300px", height: "400px" }}>
 			<Card.Image
 				src={products.image}
@@ -31,7 +48,7 @@ export default function UiCard({ products }) {
 					<Text css={{ marginRight: "10px" }}>${products.price}</Text>
 					<button
 						className={styles.button}
-						onClick={() => addItemToCart(products)}
+						onClick={(() => dosfunciones(products))}
 						style={{
 							backgroundColor: "transparent",
 							cursor: "pointer",
@@ -43,5 +60,7 @@ export default function UiCard({ products }) {
 				</Row>
 			</Card.Footer>
 		</Card>
+		</>		
+		
 	);
 }

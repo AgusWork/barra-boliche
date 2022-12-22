@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
 		getProductsCart();
 	}, []);
 
-	const addItemToCart =  (product) => {
+	const addItemToCart = (product) => {
 		// const { name, img, price } = product;
 
 		// await axios.post("http://localhost:4000/products-cart", {
@@ -55,22 +55,24 @@ export const CartProvider = ({ children }) => {
 
 		// getProducts();
 		// getProductsCart();
-        const inCart = cartItems.find((productInCart) => productInCart.id === product.id);
+		const inCart = cartItems.find(
+			(productInCart) => productInCart.id === product.id
+		);
 
-            if(inCart) {
-                setCartItems(
-                    cartItems.map((productInCart) => {
-                        if(productInCart.id === product.id){
-                            return { ...inCart, amount: inCart.amount + 1};
-                        } else return productInCart;
-                    })
-                )
-            } else {
-                setCartItems([...cartItems, { ...product, amount: 1 }])
-            }
+		if (inCart) {
+			setCartItems(
+				cartItems.map((productInCart) => {
+					if (productInCart.id === product.id) {
+						return { ...inCart, amount: inCart.amount + 1 };
+					} else return productInCart;
+				})
+			);
+		} else {
+			setCartItems([...cartItems, { ...product, amount: 1 }]);
+		}
 	};
 
-	const editItemToCart =  (product) => {
+	const editItemToCart = (product) => {
 		// if (query === "del" && amount === 1) {
 		// 	await axios
 		// 		.delete(`http://localhost:4000/products-cart/${id}`)
@@ -85,28 +87,41 @@ export const CartProvider = ({ children }) => {
 
 		// getProducts();
 		// getProductsCart();
-        const inCart = cartItems.find((productInCart) => productInCart.id === product.id);
+		const inCart = cartItems.find(
+			(productInCart) => productInCart.id === product.id
+		);
 
-            if(inCart.amount === 1) {
-                setCartItems(
-                    cartItems.filter((productInCart) => productInCart.id !== product.id)
-                )
-            } else {
-                setCartItems(
-                    
-                    cartItems.map((productInCart) => {
-                    if (productInCart.id === product.id) {
-                        return {...inCart, amount: inCart.amount - 1}
-                    } else return productInCart;
-                })
-                )
-            }
+		if (inCart.amount === 1) {
+			setCartItems(
+				cartItems.filter((productInCart) => productInCart.id !== product.id)
+			);
+		} else {
+			setCartItems(
+				cartItems.map((productInCart) => {
+					if (productInCart.id === product.id) {
+						return { ...inCart, amount: inCart.amount - 1 };
+					} else return productInCart;
+				})
+			);
+		}
+	};
+
+	const deleteAllItems = (product) => {
+		const inCart = cartItems.find(
+			(productInCart) => productInCart.id === product.id
+		);
+
+		if ((inCart.amount =+ 1)) {
+			setCartItems(
+				cartItems.filter((productInCart) => productInCart.id !== product.id)
+			);
+		}
 	};
 
 	return (
 		/* Envolvemos el children con el provider y le pasamos un objeto con las propiedades que necesitamos por value */
 		<CartContext.Provider
-			value={{ cartItems, products, addItemToCart, editItemToCart }}
+			value={{ cartItems, products, addItemToCart, editItemToCart, deleteAllItems }}
 		>
 			{children}
 		</CartContext.Provider>
